@@ -34,11 +34,15 @@ app.get('/', async(req, res)=>{
 //   res.send('쇼핑페이지입니다');
 // })
 
-app.get('/about', (req, res)=>{
-  res.sendFile(__dirname + '/about.html');
-})
+// app.get('/about', (req, res)=>{
+//   res.sendFile(__dirname + '/about.html');
+// })
+
+// app.get('/time', (req, res)=>{
+//   res.render('time.ejs', {result : new Date()});
+// })
 
 app.get('/list', async (req, res)=>{
   let result = await db.collection('post').find().toArray();
-  res.render('list.ejs')
+  res.render('list.ejs', {postList : result})
 })

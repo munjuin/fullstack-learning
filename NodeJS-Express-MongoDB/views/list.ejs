@@ -9,14 +9,14 @@
 <body class="grey-bg">
 
   <div class="white-bg">
+  <% postList.forEach((list)=>{ %>
+
     <div class="list-box">
-      <h4>글제목임</h4>
-      <p>글내용임</p>
+      <h4><%= list.title %></h4>
+      <p><%= list.content %></p>
     </div>
-    <div class="list-box">
-      <h4>글제목임</h4>
-      <p>글내용임</p>
-    </div>
+
+  <% }) %>
   </div> 
 
 </body>
