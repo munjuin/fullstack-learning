@@ -1,13 +1,24 @@
 const express = require('express');
 const app = express();
+const { MongoClient } = require('mongodb')
 
 app.use(express.static(__dirname + '/public'));
 
-app.listen(8080, ()=>{
-  console.log('http://localhost:8080 에서 서버 실행 중');
+let db
+const url = 'mongodb+srv://admin:qwer1234@cluster0.bdq28wz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+new MongoClient(url).connect().then((client)=>{
+  console.log('DB연결성공')
+  db = client.db('forum')
+
+  app.listen(8080, ()=>{
+    console.log('http://localhost:8080 에서 서버 실행 중');
+  })
+}).catch((err)=>{
+  console.log(err)
+
 })
 
-app.get('/', (req, res)=>{
+app.get('/', async(req, res)=>{
   // res.send('하이');
   res.sendFile(__dirname + '/index.html');
 })
