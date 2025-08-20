@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const { MongoClient } = require('mongodb')
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+
 app.use(express.static(__dirname + '/public'));
 
 let db
@@ -33,4 +36,9 @@ app.get('/', async(req, res)=>{
 
 app.get('/about', (req, res)=>{
   res.sendFile(__dirname + '/about.html');
+})
+
+app.get('/list', async (req, res)=>{
+  let result = await db.collection('post').find().toArray();
+  res.render('list.ejs')
 })
